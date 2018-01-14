@@ -36,6 +36,14 @@ request([
 
             }
         },
+        data: function () {
+
+
+            return {
+                isHideBodyAuto: true
+            }
+
+        },
         methods: {
             log: function (item, index) {
                 console.log(item);
@@ -47,14 +55,26 @@ request([
             beforeEnter: function () {
                 console.log('开始');
 
-                document.getElementsByTagName('body') [0].style.overflow = 'hidden';
-                document.getElementsByTagName('body') [0].style.paddingRight = '17px';
+                if (document.getElementsByTagName('body') [0].style.paddingRight == '17px') {
+                    this.isHideBodyAuto = false;
+                } else {
+                    this.isHideBodyAuto = true;
+                }
+                if (this.isHideBodyAuto) {
+                    document.getElementsByTagName('body') [0].style.overflow = 'hidden';
+                    document.getElementsByTagName('body') [0].style.paddingRight = '17px';
+                }
+
 
             },
             afterLeave: function () {
                 console.log('离开');
-                document.getElementsByTagName('body') [0].style.overflow = 'auto';
-                document.getElementsByTagName('body') [0].style.paddingRight = '0';
+
+                if (this.isHideBodyAuto) {
+                    document.getElementsByTagName('body') [0].style.overflow = 'auto';
+                    document.getElementsByTagName('body') [0].style.paddingRight = '0';
+                }
+
 
             }
         }

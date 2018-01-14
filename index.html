@@ -178,13 +178,6 @@
                             <p>在下方输入代码，相应的视图会被更新：</p>
                             <textarea v-model='body' class="form-item" rows='10'></textarea>
                             <div v-html='body'></div>
-                            <div v-html='body'></div>
-                            <div v-html='body'></div>
-                            <div v-html='body'></div>
-                            <div v-html='body'></div>
-                            <div v-html='body'></div>
-                            <div v-html='body'></div>
-                            <div v-html='body'></div>
                         </div>
 
                     </div>
@@ -247,7 +240,7 @@
 
         <transition name="number">
                 <div :class="['number',type]">
-                    <div class="number-btn number-uce"  @click='reduce()'>-</div>
+                    <div class="number-btn number-btn-reduce"  @click='reduce()'>-</div>
                     <input type="text" v-model.number='val' class="form-item" name="" id="">
                     <div class="number-btn number-btn-plus" @click='plus()'>+</div>
                 </div>
