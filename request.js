@@ -1,8 +1,6 @@
 // @ts-nocheck
 
-// document.getElementById('pageApp').style.display = 'none';
-
-
+document.getElementsByTagName('html') [0].style.display = 'none';
 
 var modList = {};
 

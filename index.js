@@ -12,7 +12,7 @@ request([
     console.log(1);
 
     Vue.nextTick(function () {
-        console.log('DOM 更新了');
+        $('html').fadeIn(300);
         move();
     })
 
