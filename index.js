@@ -12,7 +12,9 @@ request([
     console.log(1);
 
     Vue.nextTick(function () {
+
         $('html').fadeIn(300);
+
         move();
     })
 

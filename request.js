@@ -1,6 +1,12 @@
 // @ts-nocheck
+load();
+function load() {
 
-document.getElementsByTagName('html') [0].style.display = 'none';
+
+    document.getElementsByTagName('html') [0].style.display = 'none';
+
+}
+
 
 var modList = {};
 
