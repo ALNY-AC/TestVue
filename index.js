@@ -1,21 +1,30 @@
 // @ts-nocheck
+
 request([
     'index.css',
 ]);
 
 
-
 request([
-    'jquery.js',
-    'vue.js',
+    // 'jquery.js',
+    // 'vue.js',
 ], function () {
-    console.log(1);
+
+    // 注册一个全局自定义指令 `v-focus`
+    Vue.directive('focus', {
+        inserted: function (el) {
+            // 聚焦元素
+            el.focus();
+        }
+
+    });
 
     Vue.nextTick(function () {
 
-        $('html').fadeIn(300);
-
+        $("html").animate({ opacity: '1' }, 300);
         move();
+        init();
+
     })
 
     Vue.component('modal', {
@@ -23,6 +32,8 @@ request([
         props: ['visible', 'name', 'body', 'title', 'width', 'close'],
         watch: {
             visible: function (visible) {
+
+
             }
         },
         methods: {
@@ -32,6 +43,19 @@ request([
             hide: function () {
                 // this.visible = false;
                 this.$emit('update:visible', false)
+            },
+            beforeEnter: function () {
+                console.log('开始');
+
+                document.getElementsByTagName('body') [0].style.overflow = 'hidden';
+                document.getElementsByTagName('body') [0].style.paddingRight = '17px';
+
+            },
+            afterLeave: function () {
+                console.log('离开');
+                document.getElementsByTagName('body') [0].style.overflow = 'auto';
+                document.getElementsByTagName('body') [0].style.paddingRight = '0';
+
             }
         }
     });
@@ -47,10 +71,8 @@ request([
         watch: {
             val: function (val) {
 
-
                 if (val == '' || val.length <= 0) {
                     return;
-
                 }
 
                 if (this.val > this.max) {
@@ -68,14 +90,14 @@ request([
                 //减
 
                 if (this.val > this.min) {
-                    this.val = this.val - 1;
+                    this.val--;
                 }
 
             },
             plus: function () {
                 //增加
                 if (this.val < this.max) {
-                    this.val = this.val + 1;
+                    this.val++;
                 }
             }
         }
@@ -92,7 +114,6 @@ request([
                 isComplete: false,
                 list: []
             },
-            name: 'modal',
             sortType: true,
             nextNum: 0,
             num: 2,
@@ -100,7 +121,8 @@ request([
             count: 10,
             body: '<h1>Hello Word</h1>',
             modal: false,
-            modalWidth: '30'
+            modalWidth: '30',
+            user_pwd: '12138'
         },
         methods: {
             onLoadPage: function () {
@@ -342,6 +364,33 @@ var Move = {
 
         });
     },
+
+}
+function init() {
+
+
+    $('.show-code').on('click', function () {
+
+        $(this).parents().find('.show-code-view').slideToggle(100);
+
+        $(this).find('.show-icon .fa').toggleClass('fa-caret-down');
+        $(this).find('.show-icon .fa').toggleClass('fa-caret-up');
+
+
+        var title = $(this).find('.show-title').text();
+
+        if (title == '展开代码') {
+            title = '隐藏代码';
+        } else {
+            title = '展开代码';
+        }
+
+        $(this).find('.show-title').text(title);
+
+
+
+    })
+
 
 }
 

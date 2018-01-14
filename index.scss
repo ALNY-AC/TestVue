@@ -1,6 +1,10 @@
 body {
-    padding: 10px;
+    padding: 0;
     margin: 0;
+}
+
+#pageApp {
+    padding: 10px;
 }
 
 * {
@@ -14,18 +18,6 @@ hr {
     margin: 20px 0;
 }
 
-// input {
-//     width: 100%;
-//     display: block;
-//     padding: 10px;
-//     border: solid 1px #ddd;
-//     border-radius: 3px;
-//     outline: none;
-//     transition: box-shadow 0.3s;
-//     &:focus {
-//         box-shadow: 0 0 1px 1px rgba(255, 196, 0, 1);
-//     }
-// }
 .form-item {
     width: 100%;
     display: block;
@@ -33,10 +25,11 @@ hr {
     border: solid 1px #ddd;
     border-radius: 3px;
     outline: none;
-    transition: box-shadow 0.3s;
     resize: none;
+    margin-bottom: 10px;
     &:focus {
-        box-shadow: 0 0 1px 1px rgba(255, 196, 0, 1);
+        box-shadow: 0 0 1px 1px rgba(255, 196, 0, 0.502);
+        border-color: rgba(255, 195, 0, 0.502);
     }
 }
 
@@ -50,6 +43,46 @@ hr {
     font-size: 14px;
     line-height: 1;
     cursor: pointer;
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+    &.btn-red {
+        $color: #f56c6c;
+        background-color: $color;
+        color: #fff;
+        border-color: $color;
+        &:focus {
+            box-shadow: 0 0 1px 1px $color;
+        }
+    }
+    &.btn-warning {
+        $color: #E6A23C;
+        background-color: $color;
+        color: #fff;
+        border-color: $color;
+        &:focus {
+            box-shadow: 0 0 1px 1px $color;
+        }
+    }
+    &.btn-success {
+        $color: #67C23A;
+        background-color: $color;
+        color: #fff;
+        border-color: $color;
+        &:focus {
+            box-shadow: 0 0 1px 1px $color;
+        }
+    }
+    &.btn-blue {
+        $color: #409EFF;
+        background-color: $color;
+        color: #fff;
+        border-color: $color;
+        &:focus {
+            box-shadow: 0 0 1px 1px $color;
+        }
+    }
     &:focus {
         box-shadow: 0 0 1px 1px rgba(255, 196, 0, 1);
     }
@@ -90,23 +123,23 @@ hr {
     right: 0;
     left: 0;
     z-index: 99999;
-}
-
-.modal-mask {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
+    overflow: auto;
+    padding: 30px 0;
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+// .modal-mask {
+//     position: fixed;
+//     top: 0;
+//     bottom: 0;
+//     right: 0;
+//     left: 0;
+// }
 .modal-content {
     position: relative;
     background-color: #ffffff;
     width: 80%;
     margin: 0 auto;
-    top: 30px;
     border-radius: 3px;
     font-size: 14px;
     font-family: '微软雅黑';
@@ -141,13 +174,19 @@ hr {
 .modal-enter-active,
 .modal-leave-active {
     transition: all .3s;
-    top: 0;
+    .modal-content {
+        transition: all .3s;
+        top: 0;
+    }
 }
 
 .modal-enter,
 .modal-leave-to {
     opacity: 0;
-    top: -30px;
+    .modal-content {
+        opacity: 0;
+        top: -30px;
+    }
 }
 
 .clearfix {
@@ -290,17 +329,21 @@ hr {
 }
 
 .number {
+    $radius: 3px;
     display: inline-block;
     width: auto;
     position: relative;
     line-height: 1;
     text-align: center;
     white-space: nowrap;
+    border-radius: $radius;
     font-size: 14px;
     input {
         text-align: center;
         padding: 10px 0;
         display: inline-block;
+        margin: 0;
+        border-radius: $radius;
     }
     .number-btn {
         position: absolute;
@@ -314,10 +357,12 @@ hr {
         &.number-btn-reduce {
             left: 0;
             border-right: solid 1px #ddd;
+            border-radius: $radius 0 0 $radius;
         }
         &.number-btn-plus {
             right: 0;
             border-left: solid 1px #ddd;
+            border-radius: 0 $radius $radius 0;
         }
         &:hover {
             background-color: #dddddd;
@@ -345,4 +390,58 @@ hr {
     background-color: #f56c6c;
     text-align: center;
     white-space: nowrap;
+}
+
+.card {
+    .show-code-view {
+        border-top: solid 1px #ddd;
+        background-color: #f9fafc;
+        padding: 20px;
+        overflow: hidden;
+        display: none;
+        &.show {
+            height: auto;
+        }
+    }
+    .show-code {
+        text-align: center;
+        overflow: hidden;
+        color: #d3dce6;
+        padding: 15px 10px;
+        cursor: pointer;
+        .show-icon {
+            position: absolute;
+            transition: all 0.4s;
+            transform: translateX(0);
+        }
+        .show-title {
+            position: absolute;
+            opacity: 0;
+            transform: translateX(40px);
+            margin-left: -20px;
+            transition: all 0.4s;
+        }
+        .show-info {
+            position: relative;
+            transition: all 0.3s;
+            transform: translateX(40px);
+            opacity: 0;
+            padding-right: 30px;
+        }
+        &:hover {
+            color: #409eff;
+            background-color: #f9fafc;
+            .show-title {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            .show-icon {
+                transform: translateX(-40px);
+            }
+            .show-info {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    }
 }

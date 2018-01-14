@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/font/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="index.css"> -->
     <title></title>
     <script src='request.js'></script>
 
@@ -27,6 +28,72 @@
 
         </div>
 
+        <div class="card">
+
+            <div class="card-head">
+                <div class="card-title">自定义指令</div>
+            </div>
+            <div class="card-body">
+                <p>默认获取焦点指令：</p>
+                <input type="text" v-focus v-model='user_pwd' class="form-item">
+                <input type="text" v-model='user_pwd' class="form-item">
+            </div>
+            <div class="card-footer">
+
+                <p>按钮：</p>
+
+                <p>
+                    <button class="btn">按钮</button>
+                    <button class="btn btn-blue">
+                        <i class="fa fa-search"></i>
+                        按钮
+                    </button>
+                    <button class="btn btn-red">
+                        <i class="fa fa-trash-o"></i>
+                        按钮
+                    </button>
+                    <button class="btn btn-warning">
+                        <i class="fa fa-warning"></i>
+                        按钮
+                    </button>
+                    <button class="btn btn-success">
+                        <i class="fa fa-check"></i>
+                        按钮
+                    </button>
+
+                </p>
+                <P>禁用：</P>
+                <P>
+                    <button class="btn" disabled>按钮</button>
+                    <button class="btn btn-blue" disabled>
+                        <i class="fa fa-search"></i>
+                        按钮
+                    </button>
+                    <button class="btn btn-red" disabled>
+                        <i class="fa fa-trash-o"></i>
+                        按钮
+                    </button>
+                    <button class="btn btn-warning" disabled>
+                        <i class="fa fa-warning"></i>
+                        按钮
+                    </button>
+                    <button class="btn btn-success" disabled>
+                        <i class="fa fa-check"></i>
+                        按钮
+                    </button>
+                </P>
+            </div>
+            <div class="show-code-view">
+                <h1>asdf</h1>
+            </div>
+            <div class="card-footer show-code">
+                <span class="show-icon">
+                    <span class="fa fa-caret-down"></span>
+                </span>
+                <span class="show-title">展开代码</span>
+                <span class='float-right show-info'>在线演示</span>
+            </div>
+        </div>
 
 
         <div class="card">
@@ -36,9 +103,12 @@
             </div>
             <div class="card-body">
 
+                <p>0-15</p>
                 <number min='0' max='15' :value.sync='maxLength' type='xs'></number>
-                <number min='0' max='15' :value.sync='maxLength'></number>
-                <number min='0' max='15' :value.sync='maxLength' type='lg'></number>
+                <p>10-15</p>
+                <number min='10' max='15' :value.sync='maxLength'></number>
+                <p>20-30</p>
+                <number min='20' max='30' :value.sync='maxLength' type='lg'></number>
 
                 <p>
                     表单输入最大长度：
@@ -48,6 +118,8 @@
                 <p>{{todo.text}}</p>
 
             </div>
+
+
 
         </div>
 
@@ -59,8 +131,8 @@
             </div>
             <div class="card-body">
                 <p>
-                    <button @click='isShow=true' class="btn btn-red">模态框1：{{isShow}}</button>
-                    <button @click='isShow2=true' class="btn btn-red">模态框2：{{isShow2}}</button>
+                    <button @click='isShow=true' class="btn ">模态框1：{{isShow}}</button>
+                    <button @click='isShow2=true' class="btn ">模态框2：{{isShow2}}</button>
                 </p>
                 <p>在下方输入代码，相应的视图会被更新：</p>
                 <textarea v-model='body' class="form-item"></textarea>
@@ -75,7 +147,7 @@
 
                         <div class='cloth'>
                             <P>二层模态框：</P>
-                            <button @click='modal=true' class="btn btn-red">打开自定义宽度的模态框</button>
+                            <button @click='modal=true' class="btn ">打开自定义宽度的模态框</button>
                             <p>
                                 <input type="range" min="0" max="100" v-model='modalWidth'>
                                 <input type="number" v-model='modalWidth' class="form-item" name="" id="">
@@ -106,16 +178,23 @@
                             <p>在下方输入代码，相应的视图会被更新：</p>
                             <textarea v-model='body' class="form-item" rows='10'></textarea>
                             <div v-html='body'></div>
+                            <div v-html='body'></div>
+                            <div v-html='body'></div>
+                            <div v-html='body'></div>
+                            <div v-html='body'></div>
+                            <div v-html='body'></div>
+                            <div v-html='body'></div>
+                            <div v-html='body'></div>
                         </div>
 
                     </div>
                     <div class="modal-footer clearfix">
-                        <button @click='isShow=false' class="btn btn-red float-right">关闭</button>
+                        <button @click='isShow=false' class="btn  float-right">关闭</button>
                     </div>
 
                 </modal>
                 <modal :visible.sync='isShow2'>
-                    <button @click='isShow2=false' class="btn btn-red">关闭</button>
+                    <button @click='isShow2=false' class="btn ">关闭</button>
                     <div v-html='body'></div>
                 </modal>
 
@@ -140,9 +219,9 @@
             </div>
             <div class="card-footer">
 
-                <button @click='add()' class="btn btn-red">add</button>
-                <button @click='del()' class="btn btn-red">del</button>
-                <button @click='sotr()' class="btn btn-red">排序</button>
+                <button @click='add()' class="btn ">add</button>
+                <button @click='del()' class="btn ">del</button>
+                <button @click='sotr()' class="btn ">排序</button>
 
             </div>
         </div>
@@ -160,9 +239,7 @@
                 <p>{{count}}</p>
 
             </div>
-
         </div>
-
 
     </div>
 
@@ -170,7 +247,7 @@
 
         <transition name="number">
                 <div :class="['number',type]">
-                    <div class="number-btn number-btn-reduce"  @click='reduce()'>-</div>
+                    <div class="number-btn number-uce"  @click='reduce()'>-</div>
                     <input type="text" v-model.number='val' class="form-item" name="" id="">
                     <div class="number-btn number-btn-plus" @click='plus()'>+</div>
                 </div>
@@ -179,12 +256,12 @@
     </script>
     <script type="text/x-template" id="modal">
 
-        <transition name="modal">
+        <transition name="modal" v-on:after-leave="afterLeave" v-on:before-enter="beforeEnter">
 
-            <div class="modal" v-show='visible'>
-                <div class="modal-mask"  @click.stop='hide()'></div>
+            <div class="modal" v-show='visible' @click.self='hide()'>
+                <!-- <div class="modal-mask"  @click.stop='hide()'></div> -->
 
-                <div class="modal-content" :style='[{width:width+"%"}]'>
+                <div class="modal-content" :style='[{width:width+"%"}]' >
                     <span class='modal-close fa fa-close' v-if='close' @click.stop='hide()'></span>
                     <slot></slot>
                 </div>
@@ -196,6 +273,9 @@
     </script>
 
 
+    <script src='jquery.js'></script>
+    <script src='vue.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/vee-validate@latest/dist/vee-validate.js"></script>
     <script src='index.js'></script>
 
 </body>

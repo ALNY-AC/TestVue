@@ -2,8 +2,7 @@
 load();
 function load() {
 
-
-    document.getElementsByTagName('html') [0].style.display = 'none';
+    document.getElementsByTagName('html') [0].style.opacity = '0';
 
 }
 
@@ -13,7 +12,9 @@ var modList = {};
 function request(list, f) {
 
 
+
     if (list.length <= 0) {
+        if (f) f();
         return;
     }
 
