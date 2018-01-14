@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/font/css/font-awesome.min.css">
+    <title></title>
+
+</head>
+
+<body>
+    <div id="pageApp">
+
+        <div class="card">
+            <!-- 面板 -->
+            <div class="card-head">
+                <div class="card-title">拖动</div>
+            </div>
+            <div class="card-body">
+                <div class="move-fk"></div>
+                <div class="cube"></div>
+            </div>
+
+        </div>
+
+
+
+        <div class="card">
+            <!-- 表单绑定 -->
+            <div class="card-head">
+                <div class="card-title">表单绑定</div>
+            </div>
+            <div class="card-body">
+
+                <number min='0' max='15' :value.sync='maxLength' type='xs'></number>
+                <number min='0' max='15' :value.sync='maxLength'></number>
+                <number min='0' max='15' :value.sync='maxLength' type='lg'></number>
+
+                <p>
+                    表单输入最大长度：
+                    <span class="label">{{maxLength}}</span>
+                </p>
+                <input type="text" v-model='todo.text' class="form-item" name="" id="">
+                <p>{{todo.text}}</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+            <!-- 模态框 -->
+            <div class="card-head">
+                <div class="card-title">模态框</div>
+            </div>
+            <div class="card-body">
+                <p>
+                    <button @click='isShow=true' class="btn btn-red">模态框1：{{isShow}}</button>
+                    <button @click='isShow2=true' class="btn btn-red">模态框2：{{isShow2}}</button>
+                </p>
+                <p>在下方输入代码，相应的视图会被更新：</p>
+                <textarea v-model='body' class="form-item"></textarea>
+                <div class="code-view" v-html='body'></div>
+
+                <modal :visible.sync='isShow' close='true'>
+
+                    <div class="modal-head">
+                        <div class="modal-title">模态框1</div>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class='cloth'>
+                            <P>二层模态框：</P>
+                            <button @click='modal=true' class="btn btn-red">打开自定义宽度的模态框</button>
+                            <p>
+                                <input type="range" min="0" max="100" v-model='modalWidth'>
+                                <input type="number" v-model='modalWidth' class="form-item" name="" id="">
+                            </p>
+                            <p>宽度：
+                                <span class="label">{{modalWidth}}</span>%
+                            </p>
+
+                            <modal :visible.sync='modal' :width='modalWidth' close='true'>
+                                <div class="modal-body">
+                                    <div v-html='body'></div>
+                                    <input type="range" min="0" max="100" style="display: block;width: 100%" v-model='modalWidth'>
+                                    <input type="number" v-model='modalWidth' class="form-item" name="" id="">
+                                </div>
+                            </modal>
+
+                        </div>
+
+                        <div class='cloth'>
+                            <p>组件内套组件：</p>
+                            <number min='0' max='15' :value.sync='num' type='lg'></number>
+                            <p>计数：
+                                <span class="label">{{num}}</span>
+                            </p>
+                        </div>
+
+                        <div class='cloth'>
+                            <p>在下方输入代码，相应的视图会被更新：</p>
+                            <textarea v-model='body' class="form-item" rows='10'></textarea>
+                            <div v-html='body'></div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer clearfix">
+                        <button @click='isShow=false' class="btn btn-red float-right">关闭</button>
+                    </div>
+
+                </modal>
+                <modal :visible.sync='isShow2'>
+                    <button @click='isShow2=false' class="btn btn-red">关闭</button>
+                    <div v-html='body'></div>
+                </modal>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <!-- 列表 -->
+            <div class="card-head">
+                <div class="card-title">列表过度动画</div>
+            </div>
+            <div class="card-body">
+                <!-- 列表 -->
+                <div class="list">
+
+                    <transition-group name="list" tag="ul">
+                        <li v-for='(item,index) in todo.list' @click='remove(item,index)' :key='item'>{{item}}</li>
+                    </transition-group>
+
+                </div>
+
+            </div>
+            <div class="card-footer">
+
+                <button @click='add()' class="btn btn-red">add</button>
+                <button @click='del()' class="btn btn-red">del</button>
+                <button @click='sotr()' class="btn btn-red">排序</button>
+
+            </div>
+        </div>
+
+
+        <div class="card">
+            <!-- 计数器 -->
+            <div class="card-head">
+                <div class="card-title">计数器</div>
+            </div>
+            <div class="card-body">
+
+                <p>最小：5 最大：15</p>
+                <number min='5' max='15' :value.sync='count'></number>
+                <p>{{count}}</p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <script type="text/x-template" id="number">
+
+        <transition name="number">
+                <div :class="['number',type]">
+                    <div class="number-btn number-btn-reduce"  @click='reduce()'>-</div>
+                    <input type="text" v-model.number='val' class="form-item" name="" id="">
+                    <div class="number-btn number-btn-plus" @click='plus()'>+</div>
+                </div>
+        </transition>
+
+    </script>
+    <script type="text/x-template" id="modal">
+
+        <transition name="modal">
+
+            <div class="modal" v-show='visible'>
+                <div class="modal-mask"  @click.stop='hide()'></div>
+
+                <div class="modal-content" :style='[{width:width+"%"}]'>
+                    <span class='modal-close fa fa-close' v-if='close' @click.stop='hide()'></span>
+                    <slot></slot>
+                </div>
+                
+            </div>
+
+        </transition>
+
+    </script>
+
+
+    <script src='request.js '></script>
+    <script src='index.js '></script>
+
+</body>
+
+</html>
